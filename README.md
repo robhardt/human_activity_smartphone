@@ -60,7 +60,7 @@ Next, it is expected that the  script will be copied into the root directory of 
 
 Finally, here is how you would load the tidy dataset into a local variable and write it out to a text file using the **run_analysis.R** script:
 
-      setwd("*working directory*/UCI HAR dataset")
+      setwd("<working directory>/UCI HAR dataset")
       source("run_analysis.R")
       my.analysis = run_analysis()
       write.table(my.analysis, file="tidy_output.txt")
