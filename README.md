@@ -10,7 +10,7 @@ This repository contains a script that works with the Work on the "Human Activit
 
 The raw data set can be found here:  https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
-Overview
+Script Overview
 -----
 
 This repository contains a script (**run_analysis.R**) and documentation that allow a researcher to do the following:
@@ -35,7 +35,7 @@ To briefly summarize what makes the output file of this script Tidy Data, the ou
 4.  If you have multiple tables, they should include a column in the table that allows them to be linked
 
 
-Getting Started
+Getting Started with run_analysis.R
 -----
 Please note that this script uses the Plyr and Stringr libraries, so please make sure you have installed those packages before running
 
@@ -63,7 +63,17 @@ Finally, here is how you would load the tidy dataset into a local variable and w
       setwd("<working directory>/UCI HAR dataset")
       source("run_analysis.R")
       my.analysis = run_analysis()
-      write.table(my.analysis, file="tidy_output.txt")
+      write.table(my.analysis, file="test1.txt", row.names = FALSE)
 
+
+Dataset Overview
+-----
+This repository also contains a tidy dataset, **tidy_hca_output.txt**, that you can read in and peruse using the following command:
+
+      tidy_hca <- read.table("tidy_hca_output.txt", header = TRUE)
+      
+Dataset Notes
+-----
+The data set represents the 'wide' interpretation of tidy data.  To make this dataset tidy in its strictest sense, there would be only 4 columns (subject, activity, variable, measurement).  However, this dataset takes the approach that all 79 measurements for a particular subject/activity could also be considered a single observation.
 
 
