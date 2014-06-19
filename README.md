@@ -15,13 +15,35 @@ Script Overview
 
 This repository contains a script (**run_analysis.R**) and documentation that allow a researcher to do the following:
 
-* read the data from the "Human Activity Recognition Using Smartphones" data set into an R data.frame
-* merge the training and testing sets (the measurements were randomly split 70/30 into training and testing sets)
-* extract out the mean and standard deviation measurements from the data set
-* give meaningful, understandable names to the various activities performed by the subjects
-* give meaningful, understandable names to the measurements we are working with
-* aggregate the data by calculating the average for each subject/activity
-* return a 'Tidy' data set as per Hadley Wickham's criteria <link>http://vita.had.co.nz/papers/tidy-data.pdf</link>
+1. read the data from the "Human Activity Recognition Using Smartphones" data set into an R data.frame
+2. merge the training and testing sets (the measurements were randomly split 70/30 into training and testing sets)
+3. extract out the mean and standard deviation measurements from the data set
+4. give meaningful, understandable names to the various activities performed by the subjects
+5. give meaningful, understandable names to the measurements we are working with
+6. aggregate the data by calculating the average for each subject/activity
+7. return a 'Tidy' data set as per Hadley Wickham's criteria <link>http://vita.had.co.nz/papers/tidy-data.pdf</link>
+
+Script Steps
+-----
+Here is a breakdown of how the **run_analysis.R** script accomplishes each step:
+
+####1.  Read the Data into a Data Table####
+First, we need to go into the 'test' and 'train' directories and pull the data into an R Datatable.  This involves taking the 3 relevant files (*subject_test.txt, X_test.txt, and Y_test.txt* in the test directory), reading them each into a table, and then combining them with *cbind*.
+
+####2.  Merge Training and Testing####
+Once we have executed step 1 for both the training and testing sets, we can simply combine them with *rbind* and sort at will.
+
+####3.  Extract Out Only Mean and Standard Deviation Measurements from the Dataset####
+This involves removing all of the 561 features that don't directly capture a mean or standard deviation.  According to the **features_info.txt** file, there were several variables that were estimated over a single signal within a sliding time window.  Two of these variables were *mean()* and *std()*.  I took the other instances of 'mean' such as *tBodyAccMean* to be averages of multiple signals and not intended to be included in the final dataset.  So to extract out these variables, I was able to limit the columns to those with *mean()* or *std()* in their name.
+
+####4. Give Meaningful, Understandable Names to Activities####
+This was done by reading **activity_labels.txt**, which was included with the dataset, into a data table and using it as a lookup table for the numeric activity designations in the *Y_test.txt* or *Y_train.txt* files.
+
+####5. Give Meaningful, Understandable Names to Measurements####
+This was accomplished by applying a series of regex substitutions to the column names to make them both human-readable and R-legal.
+
+####6. Aggregate the Data & Return a Tidy Dataset
+At this point the data was already tidy, so we simply apply a simple aggregation function to the data to group it by subject/activity and calculate the mean.
 
 
 Tidy Data
@@ -74,6 +96,6 @@ This repository also contains a tidy dataset, **tidy_hca_output.txt**, that you 
       
 Dataset Notes
 -----
-The data set represents the 'wide' interpretation of tidy data.  To make this dataset tidy in its strictest sense, there would be only 4 columns (subject, activity, variable, measurement).  However, this dataset takes the approach that all 79 measurements for a particular subject/activity could also be considered a single observation.
+The data set represents the 'wide' interpretation of tidy data.  To make this dataset tidy in its strictest sense, there would be only 4 columns (subject, activity, variable, measurement).  However, this dataset takes the approach that all 66 measurements for a particular subject/activity could also be considered a single observation.
 
 
