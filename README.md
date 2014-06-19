@@ -40,7 +40,7 @@ This involves removing all of the 561 features that don't directly capture a mea
 This was done by reading **activity_labels.txt**, which was included with the dataset, into a data table and using it as a lookup table for the numeric activity designations in the *Y_test.txt* or *Y_train.txt* files.
 
 ####5. Give Meaningful, Understandable Names to Measurements####
-This was accomplished by applying a series of regex substitutions to the column names to make them both human-readable and R-legal.
+This was accomplished by applying a series of regex substitutions to the column names to make them both human-readable and R-legal.  During this step, I also addressed typos in the column name such as those containing *BodyBody*.
 
 ####6. Aggregate the Data & Return a Tidy Dataset
 At this point the data was already tidy, so we simply apply a simple aggregation function to the data to group it by subject/activity and calculate the mean.
